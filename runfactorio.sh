@@ -86,11 +86,15 @@ function server_config () {
     fi
 # The 'here document' '<<-' redirection deletes all leading tabs
 # Replacing the tabs with spaces will break the script.
+
+# fix for TAGS to be a proper JSON array
+TAGS_JSON=$(echo "${TAGS}" | sed 's/,/","/g')
+
     cat > /opt/factorio/data/server-settings.json <<- EOF
         {
             "name": "${SERVER_NAME}",
             "description": "${SERVER_DESCRIPTION}",
-            "tags": ["${TAGS//,/\",\"}"],
+            "tags": ["${TAGS_JSON}"],
             "max_players": ${MAX_PLAYERS},
             "visibility": {
                 "public": ${IS_PUBLIC},
