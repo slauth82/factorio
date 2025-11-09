@@ -1,0 +1,44 @@
+name: 01.Check Build Push To Docker
+
+on:
+  push:
+    paths:
+      - 'Dockerfile'
+      - 'runfactorio.sh'
+
+jobs:
+  docker:
+    runs-on: debian:latest-slim
+    permissions:
+      contents: read
+      security-events: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Validate build configuration
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          call: check
+          build-args: |
+            BUILDKIT_DOCKERFILE_CHECK=skip=SecretsUsedInArgOrEnv
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPO }}:latest
+          build-args: |
+            BUILDKIT_DOCKERFILE_CHECK=skip=SecretsUsedInArgOrEnv
+   
