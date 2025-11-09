@@ -125,17 +125,23 @@ echo "COMPLETED-Configuration JSON file created at /opt/factorio/data."
 echo "Aligning Factorio Config directory permissions to UID:GID ${UID}:${GID}..."
 chown -R "${UID}:${GID}" /opt/factorio/data
 echo "COMPLETED-Permissions aligned."
+echo "================================================================"
+echo "Begin save file handling..."
+echo "================================================================"
 }
-
-echo "░█▀█░█░█░░░░░░░▀█░░░░░░▀▀█░▄▀▄░▀▀█░░░█▀▄░█░█░▀█▀░░░▀█▀░▀█▀░▀░█▀▀░░░█░░░█░█░█▀█░█▀▀░█░█░░░";
-echo "░█░█░█▀█░░░░░░░░█░░░▀░░░▀▄░█/█░░▀░░░░█▀▄░█░█░░█░░░░░█░░░█░░░░▀▀█░░░█░░░█░█░█░█░█░░░█▀█░░░";
-echo "░▀▀▀░▀░▀░▄▀░░░░▀▀▀░░▀░░▀▀░░░▀░░░▀░░░░▀▀░░▀▀▀░░▀░░░░▀▀▀░░▀░░░░▀▀▀░░░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀░▀░";
 
 function save_file_handler () {
     LOAD_LATEST_SAVE=${LOAD_LATEST_SAVE:-true}
-    
+     # If SAVE_NAME isn't set or SAVE_DIR doesn't exist, create default save
+    if [[ -z "${SAVE_NAME:-}" ]] || [[ ! -d "${SAVE_DIR}" ]]; then
+        echo "SAVE_NAME or SAVE_DIR not specified, creating default save..."
+        LOAD_SAVE="${SAVE_DIR}/_autosave1.zip"
+        ${FACTORIO_BIN} --create "${LOAD_SAVE}"
+        echo "Created new save at ${LOAD_SAVE}"
+        return 0clear
+    fi
     if [[ "${LOAD_LATEST_SAVE}" == "true" ]]; then
-    LOAD_SAVE=$(ls -1t "${SAVE_DIR}"/"${SAVE_NAME}".zip 2>/dev/null | head -n 1)
+    LOAD_SAVE=$(ls -1t "${SAVE_DIR}"/*.zip 2>/dev/null | head -n 1)
         if [[ -z "${LOAD_SAVE}" ]]; then
             echo "No save found, creating new save..."
             ${FACTORIO_BIN} --create "${SAVE_DIR}/_autosave1.zip"
@@ -156,13 +162,13 @@ echo "COMPLETED-Permissions aligned."
 # function to build a complete the Factorio server command line argument and run it.
 function rungame () {
     echo "Building command to start Factorio server..."
-    SERVER_CMD=("${FACTORIO_BIN}"
-    "--start-server" "${LOAD_SAVE}"
-    "--server-settings" "${CONFIG_DIR}/server-settings.json"
-    "--port" "${PORT}"
-    "--rcon-port" "${RCON_PORT}"
-    "--rcon-password" "${RCON_PASSWORD}"
-    "--log-file" "${CONFIG_DIR}/factorio-current.log"
+    SERVER_CMD=("${FACTORIO_BIN}" \
+    "--start-server" "${LOAD_SAVE}" \
+    "--server-settings" "${CONFIG_DIR}/server-settings.json" \
+    "--port" "${PORT}" \
+    "--rcon-port" "${RCON_PORT}" \
+    "--rcon-password" "${RCON_PASSWORD}" \
+    "--console-log" "${CONFIG_DIR}/console.log"
 )  # Close the array FIRST
 
 # Then add conditional elements AFTER
@@ -194,5 +200,6 @@ echo "================================================================"
 initial_setup
 server_config
 save_file_handler
+#LOAD_SAVE="C:\Users\%USERNAME%\OneDrive\Desktop\factorio\saves\Server.zip" # manually set for testing
 rungame
 #================================

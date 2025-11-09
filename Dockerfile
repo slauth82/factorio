@@ -52,6 +52,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     tzdata \
     nano \
+    gosu \
     xz-utils && \
     ln -snf /usr/share/zoneinfo/$TZINFO /etc/localtime && \
     echo $TZINFO > /etc/timezone && \
