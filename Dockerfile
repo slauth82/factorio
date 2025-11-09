@@ -26,8 +26,8 @@ ENV LOAD_LATEST_SAVE=true \
     ONLY_ADMINS_CAN_PAUSE=true \
     IGNORE_PLAYER_LIMIT_FOR_RETURNING_PLAYERS=false \
     #Use to set container permissions equal to the UID/GID of the host; otherwise, volume mounts will break. Setting default to avoid using 1000. 
-    UID=992 \
-    GID=992 \
+    UID=845 \
+    GID=845 \
     #NETWORKING
     PORT=34197 \
     RCON_PORT=27015 \
@@ -43,7 +43,7 @@ ENV LOAD_LATEST_SAVE=true \
 # Metadata
 LABEL maintainer="slauth82" \
       description="Containerized Factorio Server Personal Challenge" \
-      version="0.1.0-alpha"
+      version="1.0.0-alpha"
 
 # Install core dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -91,9 +91,9 @@ RUN sed -i 's/\r$//' /runfactorio.sh
 RUN chmod +x /runfactorio.sh
 
 # Create factorio user and group and set ownership permissions
-RUN groupadd -g ${GID} factorio && \
-    useradd --create-home --no-log-init -o -u ${UID} -g ${GID} factorio -m -s /bin/bash factorio
-RUN chown -R ${UID}:${GID} /opt/factorio 
+RUN groupadd -o -g "${GID}" factorio \
+  && useradd --create-home --no-log-init -o -u "${UID}" -g "${GID}" factorio
+RUN chown -R "${UID}":"${GID}" /opt/factorio
 
 # Set entrypoint
 ENTRYPOINT ["/bin/bash"]
