@@ -43,7 +43,7 @@ ENV LOAD_LATEST_SAVE=true \
 # Metadata
 LABEL maintainer="slauth82" \
       description="Containerized Factorio Server Personal Challenge" \
-      version="1.0.0-alpha"
+      version="1.0.0-beta"
 
 # Install core dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
