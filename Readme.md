@@ -37,8 +37,8 @@ Skip steps 1 and 2 above and begin with step 3.
 |ALLOWCOMMANDS| Possible values are, true, false and admins-only. |admins-only
 |AUTOSAVE_INTERVAL| Autosave interval in MINUTES. |10
 |AUTOSAVE_SLOTS| Server autosave slots, it is cycled through when the server autosaves. |5
-|UID| Nonroot user UID on the host. |992
-|GID| Nonroot user GID on the host. |992
+|UID| Nonroot user UID on the host. |845
+|GID| Nonroot user GID on the host. |845
 |TZINFO| Timezone for container for logs. |America/Los_Angeles
 |AUTOSAVE_SERVER_ONLY| Whether autosaves should be saved only on server or also on all connected clients. |true
 |AFK_AUTOKICK_INTERVAL|How many minutes until someone is kicked when doing nothing, 0 for never. |0
