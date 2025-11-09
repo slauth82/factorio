@@ -49,49 +49,7 @@ Skip steps 1 and 2 above and begin with step 3.
 
 ## Getting Started Example
 
-1. Understand where your map and mods are located. E.g mine are at: name: 01.Check Build Push To Docker
-
-on:
-  push:
-    paths:
-      - Dockerfile
-      - runfactorio.sh
-
-jobs:
-  docker:
-    runs-on: ubuntu-latest
-    container:
-      image: debian:stable-slim
-    permissions:
-      contents: read
-      security-events: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Validate build configuration
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          call: check
-
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPO }}:latest
-          build-args: DEBIAN_FRONTEND=noninteractive
-
+1. Understand where your map and mods are located. E.g mine are at: 
 ```bash
 U:\Users\%USERNAME%\AppData\Roaming\Factorio\saves\map.zip U:\Users\%USERNAME%\AppData\Roaming\Factorio\mods
 ```
