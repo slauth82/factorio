@@ -49,7 +49,52 @@ Skip steps 1 and 2 above and begin with step 3.
 
 ## Getting Started Example
 
-1. Understand where your map and mods are located. E.g U:\Users\%USERNAME%\AppData\Roaming\Factorio\saves\map.zip and U:\Users\%USERNAME%\AppData\Roaming\Factorio\mods
+1. Understand where your map and mods are located. E.g mine are at: name: 01.Check Build Push To Docker
+
+on:
+  push:
+    paths:
+      - Dockerfile
+      - runfactorio.sh
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:stable-slim
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Validate build configuration
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          call: check
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPO }}:latest
+          build-args: DEBIAN_FRONTEND=noninteractive
+
+```bash
+U:\Users\%USERNAME%\AppData\Roaming\Factorio\saves\map.zip U:\Users\%USERNAME%\AppData\Roaming\Factorio\mods
+```
 2. Remote into your host using a nonroot user with sudoers privileges and create a new nonroot user. E.g sudo useradd -m factorio
 3. Grab the UID/GID of the nonroot user you just created. If you didn't grab it earlier, use sudo cat /etc/passwd, find your nonroot user name, and grab the ID numbers - should look like 123:123. 
 4. Switch to the new nonroot user you just made and make a working directory for your compose and secrets, or use your home directory. 
