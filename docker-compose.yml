@@ -24,12 +24,12 @@ services:
         Hosted by WesleySakamoto. 
       - TAGS=game,factorio,dedicated,server,spaceage,modded
       - LOAD_LATEST_SAVE=true
-      - SAVE_NAME=ServerFork.zip
+      - SAVE_NAME=ServerFork
       - MAX_PLAYERS=10
       - IS_PUBLIC=true
       - IS_LAN=true
       - REQUIRE_USER_VERIFICATION=true
-      - ALLOWCOMMANDS=admins-only
+      - ALLOW_COMMANDS=admins-only
       - AUTOSAVE_INTERVAL=10
       - AUTOSAVE_SLOTS=6
       - UID=1001
@@ -40,6 +40,11 @@ services:
       - AUTO_PAUSE_WHEN_PLAYERS_CONNECT=false 
       - ONLY_ADMINS_CAN_PAUSE=true 
       - IGNORE_PLAYER_LIMIT_FOR_RETURNING_PLAYERS=false 
+      - AUTO_PAUSE=true
+      - PORT=34197
+      - RCON_PORT=27015
+      - FACTORIO_VERSION=stable
+
 secrets:
   FACTORIO_USERNAME:
     file: ./.secrets/FACTORIO_USERNAME.txt

@@ -29,7 +29,7 @@ Skip steps 1 and 2 above and begin with step 3.
 |SERVER_DESCRIPTION| Description of the game that will appear in the listing.
 |TAGS| Tags!
 |LOAD_LATEST_SAVE| Tells the runfactorio.sh to load the map named specified under SAVE_NAME.| true 
-|SAVE_NAME| Name of map file e.g. map.zip
+|SAVE_NAME| Name of map file e.g. map (ignore providing .zip)
 |MAX_PLAYERS| Maximum number of players. 0 means unlimited.| 0
 |IS_PUBLIC| Game will be published on the official Factorio matching server. | false
 |IS_LAN| Game will be broadcast on LAN. | true

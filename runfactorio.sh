@@ -86,38 +86,38 @@ else
 fi
 # The 'here document' '<<-' redirection deletes all leading tabs
 # Replacing the tabs with spaces will break the script.
-cat > /opt/factorio/data/server-settings.json <<- EOF 
-{
-    "name": "${SERVER_NAME}",
-    "description": "${SERVER_DESCRIPTION}",
-    "tags": [${TAGS//,/","}],
-    "max_players": ${MAX_PLAYERS},
-    "visibility": {
-        "public": ${IS_PUBLIC},
-        "lan": ${IS_LAN}
-    },
-    "require_user_verification": ${REQUIRE_USER_VERIFICATION},
-    "allow_commands": "${ALLOWCOMMANDS}",
-    "autosave_interval": ${AUTOSAVE_INTERVAL},
-    "autosave_slots": ${AUTOSAVE_SLOTS},
-    "autosave_only_on_server": ${AUTOSAVE_SERVER_ONLY},
-    "afk_autokick_interval": ${AFK_AUTOKICK_INTERVAL},
-    "auto_pause": ${AUTO_PAUSE},
-    "auto_pause_when_players_connect": ${AUTO_PAUSE_WHEN_PLAYERS_CONNECT},
-    "only_admins_can_pause_the_game": ${ONLY_ADMINS_CAN_PAUSE},
-    "ignore_player_limit_for_returning_players": ${IGNORE_PLAYER_LIMIT_FOR_RETURNING_PLAYERS},
-    "token": "${FACTORIO_TOKEN}",
-    "username": "${FACTORIO_USERNAME}",
-    "game_password": "${FACTORIO_GAME_PASSWORD}",
-    "minimum_segment_size": ${MINIMUM_SEGMENT_SIZE},
-    "minimum_segment_size_peer_count": ${MINIMUM_SEGMENT_SIZE_PEER_COUNT},
-    "maximum_segment_size": ${MAXIMUM_SEGMENT_SIZE},
-    "maximum_segment_size_peer_count": ${MAXIMUM_SEGMENT_SIZE_PEER_COUNT},
-    "minimum_latency_in_ticks": ${MINIMUM_LATENCY_IN_TICKS},
-    "max_heartbeat_per_second": ${MAX_HEARTBEAT_PER_SECOND},
-    "max_upload_slots": ${MAX_UPLOAD_SLOTS},
-    "max_upload_in_kilobytes_per_second": ${MAX_UPLOAD_IN_KILOBYTES_PER_SECOND}
-}
+cat > /opt/factorio/data/server-settings.json <<- EOF
+	{
+		"name": "${SERVER_NAME}",
+		"description": "${SERVER_DESCRIPTION}",
+		"tags": ["${TAGS//,/\",\"}"],
+		"max_players": ${MAX_PLAYERS},
+		"visibility": {
+			"public": ${IS_PUBLIC},
+			"lan": ${IS_LAN}
+		},
+		"require_user_verification": ${REQUIRE_USER_VERIFICATION},
+		"allow_commands": "${ALLOW_COMMANDS}",
+		"autosave_interval": ${AUTOSAVE_INTERVAL},
+		"autosave_slots": ${AUTOSAVE_SLOTS},
+		"autosave_only_on_server": ${AUTOSAVE_SERVER_ONLY},
+		"afk_autokick_interval": ${AFK_AUTOKICK_INTERVAL},
+		"auto_pause": ${AUTO_PAUSE},
+		"auto_pause_when_players_connect": ${AUTO_PAUSE_WHEN_PLAYERS_CONNECT},
+		"only_admins_can_pause_the_game": ${ONLY_ADMINS_CAN_PAUSE},
+		"ignore_player_limit_for_returning_players": ${IGNORE_PLAYER_LIMIT_FOR_RETURNING_PLAYERS},
+		"token": "${FACTORIO_TOKEN}",
+		"username": "${FACTORIO_USERNAME}",
+		"game_password": "${FACTORIO_GAME_PASSWORD}",
+		"minimum_segment_size": 25,
+		"minimum_segment_size_peer_count": 20,
+		"maximum_segment_size": 100,
+		"maximum_segment_size_peer_count": 10,
+		"minimum_latency_in_ticks": 2,
+		"max_heartbeat_per_second": 60,
+		"max_upload_slots": 0,
+		"max_upload_in_kilobytes_per_second": 0
+	}
 EOF
 
 echo "COMPLETED-Configuration JSON file created at /opt/factorio/data."
@@ -157,32 +157,35 @@ echo "COMPLETED-Permissions aligned."
 function rungame () {
     echo "Building command to start Factorio server..."
     SERVER_CMD=("${FACTORIO_BIN}"
-    "--start-server" "${LOAD_SAVE}" 
+    "--start-server" "${LOAD_SAVE}"
     "--server-settings" "${CONFIG_DIR}/server-settings.json"
     "--port" "${PORT}"
     "--rcon-port" "${RCON_PORT}"
     "--rcon-password" "${RCON_PASSWORD}"
     "--log-file" "${CONFIG_DIR}/factorio-current.log"
-    )
-    # Dynamically add whitelist, banlist, and adminlist to command statement if files exist
-    if [[ -f "${CONFIG_DIR}/server-whitelist.json" ]]; then
+)  # Close the array FIRST
+
+# Then add conditional elements AFTER
+if [[ -f "${CONFIG_DIR}/server-whitelist.json" ]]; then
     SERVER_CMD+=("--server-whitelist" "${CONFIG_DIR}/server-whitelist.json")
-    fi
-    if [[ -f "${CONFIG_DIR}/server-banlist.json" ]]; then
+fi
+
+if [[ -f "${CONFIG_DIR}/server-banlist.json" ]]; then
     SERVER_CMD+=("--server-banlist" "${CONFIG_DIR}/server-banlist.json")
-    fi
-    if [[ -f "${CONFIG_DIR}/server-adminlist.json" ]]; then
+fi
+
+if [[ -f "${CONFIG_DIR}/server-adminlist.json" ]]; then
     SERVER_CMD+=("--server-adminlist" "${CONFIG_DIR}/server-adminlist.json")
-    fi
-    echo "Command built: ${SERVER_CMD[*]}"
-    echo "Starting Factorio server..."
-    su factorio -c "exec  \"${SERVER_CMD[@]}\""
-    echo "================================================================"
-    echo "Factorio Server Running."
-    echo "================================================================"
-    echo ░█▀▀░█░░░█▀█░█▀█░░░▀░█▀▀░█▄█░░░█░█░█▀█░█
-    echo ░▀▀█░█░░░█░█░█▀▀░░░░░█▀▀░█░█░░░█░█░█▀▀░▀
-    echo ░▀▀▀░▀▀▀░▀▀▀░▀░░░░░░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀  
-    echo "================================================================"
+fi
+echo "Command built: ${SERVER_CMD[*]}"
+echo "Starting Factorio server..."
+    exec gosu factorio "${SERVER_CMD[@]}"
+echo "================================================================"
+echo "Factorio Server Running."
+echo "================================================================"
+echo ░█▀▀░█░░░█▀█░█▀█░░░▀░█▀▀░█▄█░░░█░█░█▀█░█
+echo ░▀▀█░█░░░█░█░█▀▀░░░░░█▀▀░█░█░░░█░█░█▀▀░▀
+echo ░▀▀▀░▀▀▀░▀▀▀░▀░░░░░░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀  
+echo "================================================================"
 
 }
