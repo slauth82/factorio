@@ -1,9 +1,11 @@
 name: 01.Check Build Push To Docker
 on:
+  workflow_dispatch:  
   push:
     paths:
       - 'Dockerfile'
       - 'runicarus.sh'
+   
 
 jobs:
   docker:
