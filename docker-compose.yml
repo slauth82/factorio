@@ -1,7 +1,7 @@
 services:
   factorio:
     container_name: factorio
-    image: slautomaton/factorio:latest
+    image: slautomaton/factorio:test
     hostname: factorio-dedicated
     init: true
     restart: "unless-stopped"
