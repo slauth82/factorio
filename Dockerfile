@@ -1,5 +1,5 @@
 # Choosing Debian Slim base because it already includes glibc and 64-bit libraries needed to run Factorio. Disregarded Alpine having to compile glibc by hand - adding complexity I don't need and with neglible size benefits.
-FROM debian:stable-slim
+FROM debian:trixie-slim
 
 # Arguments can only be set at build time, not runtime, and are baked into the build meta data. Do not put secrets in here.
 ARG DEBIAN_FRONTEND=noninteractive
@@ -13,7 +13,7 @@ ENV LOAD_LATEST_SAVE=true \
     SERVER_DESCRIPTION="" \
     TAGS="" \
     MAX_PLAYERS=0 \
-    IS_PUBLIC=true \
+    IS_PUBLIC=false \
     IS_LAN=true \
     REQUIRE_USER_VERIFICATION=false \
     ALLOWCOMMANDS=admins-only \
@@ -41,9 +41,10 @@ ENV LOAD_LATEST_SAVE=true \
     MAX_UPLOAD_IN_KILOBYTES_PER_SECOND=0 
     
 # Metadata
-LABEL maintainer="slauth82" \
-      description="Containerized Factorio Server Personal Challenge" \
-      version="1.0.0-beta"
+LABEL maintainer="slauth82 <joboffers@divebored.com>" \
+      description="Containerized dedicated server for Factorio Space Age with mod support" \
+      version="1.0.0" \
+      author="slauth82" 
 
 # Install core dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
