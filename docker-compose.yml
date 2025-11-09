@@ -24,7 +24,7 @@ services:
         Hosted by WesleySakamoto. 
       - TAGS=game,factorio,dedicated,server,spaceage,modded
       - LOAD_LATEST_SAVE=true
-      - SAVE_NAME=ServerFork
+      - SAVE_NAME=ServerFork.zip
       - MAX_PLAYERS=10
       - IS_PUBLIC=true
       - IS_LAN=true
@@ -37,9 +37,9 @@ services:
       - TZINFO=America/Los_Angeles
       - AUTOSAVE_SERVER_ONLY=true
       - AFK_AUTOKICK_INTERVAL=25
-      - AUTO_PAUSE_WHEN_PLAYERS_CONNECT=false 
-      - ONLY_ADMINS_CAN_PAUSE=true 
-      - IGNORE_PLAYER_LIMIT_FOR_RETURNING_PLAYERS=false 
+      - AUTO_PAUSE_WHEN_PLAYERS_CONNECT=false
+      - ONLY_ADMINS_CAN_PAUSE=true
+      - IGNORE_PLAYER_LIMIT_FOR_RETURNING_PLAYERS=false
       - AUTO_PAUSE=true
       - PORT=34197
       - RCON_PORT=27015
