@@ -6,17 +6,17 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/01.yml?style=plastic&logo=github&label=Build)
 
 # Containerized Factorio Space Age Dedicated Server
-This repository contains a Docker container image that hosts a Factorio Space Age dedicated server for users with maps they already previewed or started locally. This image completely ignores server-sided map gen commandline, because I believe everyone will want to use the GUI to preview their map seeds and adjust difficulty sliders ahead of time since its faster to get started.
+This repository contains a Docker container image that hosts a Factorio Space Age dedicated server for users with maps they already previewed or started locally. This image completely ignores server-sided map gen commandline, because I believe everyone will want to use the GUI to preview their map seeds and adjust difficulty sliders as its faster to get started. 
 
 ## Thematically...
 ### Starting a New Game for MP
 1. Use your Factorio game client to preview map gen settings.
 2. Use your Factorio game client to preview, download, and install mods you want you use.
-3. Navigate through your Factorio game client's directory, find **`map.zip`** and **`/mods`**, and then copy your map and mods into **`host/path/to/saves`** and **`host/path/to/mods`**, which is mounted by **`/opt/factorio/saves`** and **`/opt/factorio`**, respectively via your **`docker-compose.yml`** file. 
-4. Remote into your host, create a **`workdir`**, or use your home directory and from your **`workdir`**, author your **`.secrets`** and **`docker-compose.yml`**. FACTORIO_USERNAME, FACTORIO_PASSWORD or FACTORIO_TOKEN are PREREQUISITES for your server to be included on the official Factorio server browser. You can leave these blank if you intend to be LAN only. 
+3. Navigate through your Factorio game client's directory, find **`map.zip`** and **`/mods`**, and then copy your map and mods into **`host/path/to/saves`** and **`host/path/to/mods`** on your container host, which are mounted to **`/opt/factorio/saves`** and **`/opt/factorio`**, respectively via your **`docker-compose.yml`** file. 
+4. Remote into your host, either create a **`workdir`**, or use your home directory and from your **`workdir`**, author your **`.secrets`** and **`docker-compose.yml`**. FACTORIO_USERNAME, FACTORIO_PASSWORD or FACTORIO_TOKEN are PREREQUISITES for your server to be included on the official Factorio server browser. You can leave these blank if you intend to be LAN only. 
 5. Use **`docker compose up -d`** to run the server.
 6. Use **`docker compose down`**  to kill the server.
-7. Use **`docker compose restart`** to restart the server. Use this ONLY for troubleshooting or reapplying ENV variables changed since the last runtime i.e. **`docker exec -it -NAME=something`**. When making changes to ENV variables within the **`docker-compose.yml`**, you MUST use a **`docker compose down/up`** cycle.
+7. When making changes to ENV variables within the **`docker-compose.yml`**, you MUST use a **`docker compose down/up`** cycle.
 
 ### Loading a Pre-existing Game for MP
 Skip steps 1 and 2 above and begin with step 3. 
