@@ -209,15 +209,14 @@ echo "================================================================"
 }
 function log_mover(){
 ## Get the logs out of data folder.
-#if [[ -f "${CONFIG_DIR}/factorio-current.log" ]]; then
-#    mv /opt/factorio/data/factorio-current.log /opt/factorio/log/
-#fi
-#if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
-#    mv /opt/factorio/data/factorio-previous.log /opt/factorio/log/
-#fi
-ln -s /opt/factorio/log/factorio-current.log /opt/factorio/data/factorio-current.log
-ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/data/factorio-previous.log
-
+if [[ -f "${CONFIG_DIR}/factorio-current.log" ]]; then
+    mv /opt/factorio/factorio-current.log /opt/factorio/log/
+fi
+if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
+    mv /opt/factorio/factorio-previous.log /opt/factorio/log/
+fi
+ln -s /opt/factorio/log/factorio-current.log /opt/factorio/factorio-current.log
+ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/factorio-previous.log
 echo "Aligning Factorio Log directory permissions to UID:GID ${UID}:${GID}..."
 chown -R "${UID}:${GID}" /opt/factorio/log
 echo "COMPLETED-Permissions aligned."
