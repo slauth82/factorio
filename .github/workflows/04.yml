@@ -41,7 +41,7 @@ jobs:
           output: 'trivy-report.sarif'
           limit-severities-for-sarif: 'true'
         env:
-          TRIVY_VEX: '.github/vex'
+          TRIVY_VEX: '.github/vex/golang-exceptions.vex.json'
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
