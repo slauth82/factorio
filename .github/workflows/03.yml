@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     
 jobs:
-  docker:
+  docker-scout-cve-scan:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,6 +37,7 @@ jobs:
         with:
           command: cves
           image: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPO }}:stable
+          vex-location: .vex # Path to VEX file in repo root
           only-severities: critical,high
           only-fixed: true
           write-comment: true
