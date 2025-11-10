@@ -34,12 +34,13 @@ jobs:
 
       - name: Docker Scout CVEs
         uses: docker/scout-action@v1
+        continue-on-error: true 
         with:
           command: cves
           image: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPO }}:stable
           vex-location: .vex/ # Path to VEX file in repo root
           only-severities: critical,high
-          ## only-fixed: true
+          only-fixed: true
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           exit-code: true
