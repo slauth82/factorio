@@ -1,4 +1,4 @@
-name: Factorio Version Badge
+name: 05.Factorio Version Badge
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-badge:
+  factorio-badge:
     runs-on: ubuntu-latest
     permissions:
       contents: write
