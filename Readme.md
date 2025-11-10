@@ -1,7 +1,7 @@
 ![Docker Image Version](https://img.shields.io/docker/v/slautomaton/factorio?arch=amd64&style=plastic&logo=docker&label=Image%20Version)
 ![Docker Pulls](https://img.shields.io/docker/pulls/slautomaton/factorio?style=plastic&logo=docker&label=Docker%20Pulls)
 ![Docker Image Size](https://img.shields.io/docker/image-size/slautomaton/factorio?arch=amd64&style=plastic&logo=docker&label=Image%20Size) \
-![Factorio Version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/slauth82/factorio/main/.github/badges/factorio-version.json)
+![Factorio Version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/slauth82/factorio/master/.github/badges/factorio-version.json)
 ![GitHub License](https://img.shields.io/github/license/slauth82/factorio?style=plastic&logo=github&lable=License)
 ![GitHub last commit](https://img.shields.io/github/last-commit/slauth82/factorio?style=plastic&logo=github&label=Last%20Commit)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/01.yml?style=plastic&logo=github&label=Build) \
