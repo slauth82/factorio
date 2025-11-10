@@ -58,11 +58,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xz-utils && \
     ln -snf /usr/share/zoneinfo/$TZINFO /etc/localtime && \
     echo $TZINFO > /etc/timezone && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get purge -y golang golang-1.24 golang-go && \
+    # Clean up golang if it got pulled in as a dependency
+    apt-mark hold golang-go 2>/dev/null || true && \
+    dpkg --purge --force-all golang-go 2>/dev/null || true && \
     apt-get autoremove -y && \
-    rm -rf /usr/local/go /usr/lib/go /usr/lib/golang
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /usr/local/go /usr/lib/go /usr/lib/golang
 
 # Create directory structure
 RUN mkdir -p /opt/factorio /opt/factorio/config /opt/factorio/saves /opt/factorio/mods /opt/factorio/scenarios /opt/factorio/script-output
