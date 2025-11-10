@@ -76,6 +76,21 @@
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
       "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server. The vulnerable code paths are never invoked during container runtime."
+    },
+    {
+      "products": [
+        {
+          "@id": "pkg:docker/slautomaton/factorio@stable"
+        }
+      ],
+      "subcomponents": [
+        {
+          "@id": "pkg:golang/stdlib@1.24.4"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impact_statement": "Golang stdlib package (all CVEs: CVE-2025-61725, CVE-2025-61723, CVE-2025-58188, CVE-2025-58187) is present in debian:trixie-slim base image but not executed by Factorio game server runtime. The vulnerable code paths are never invoked."
     }
   ]
 }
