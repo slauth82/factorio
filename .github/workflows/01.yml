@@ -8,7 +8,7 @@ on:
    
 
 jobs:
-  docker:
+  docker-build-n-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read

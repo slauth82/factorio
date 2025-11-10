@@ -5,7 +5,7 @@ on:
     - cron: "20 2 * * SUN"
   workflow_dispatch:
 jobs:
-  docker:
+  trivy-cve-scan:
     runs-on: ubuntu-latest
     permissions:
       contents: read
