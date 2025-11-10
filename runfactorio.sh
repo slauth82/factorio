@@ -181,7 +181,9 @@ if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
 fi
 ln -s /opt/factorio/log/factorio-current.log /opt/factorio/data/factorio-current.log
 ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/data/factorio-previous.log
-
+echo "Aligning Factorio Log directory permissions to UID:GID ${UID}:${GID}..."
+chown -R "${UID}:${GID}" /opt/factorio/log
+echo "COMPLETED-Permissions aligned."
 }
 # function to build a complete the Factorio server command line argument and run it.
 function rungame () {
