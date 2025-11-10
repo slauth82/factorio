@@ -31,18 +31,19 @@ ENV LOAD_LATEST_SAVE=true \
     GID=845 \
     #NETWORKING
     PORT=34197 \
-    RCON_PORT=27015 \
-    MINIMUM_SEGMENT_SIZE=25 \
-    MINIMUM_SEGMENT_SIZE_PEER_COUNT=20 \
-    MAXIMUM_SEGMENT_SIZE=100 \
-    MAXIMUM_SEGMENT_SIZE_PEER_COUNT=10 \
-    MINIMUM_LATENCY_IN_TICKS=2 \
-    MAX_HEARTBEATS_PER_SECOND=60 \
-    MAX_UPLOAD_SLOTS=5 \
-    MAX_UPLOAD_IN_KILOBYTES_PER_SECOND=0 
+    RCON_PORT=27015 
+    #commentted out and used default settings from server-settings.json sample
+    #MINIMUM_SEGMENT_SIZE=25 \
+    #MINIMUM_SEGMENT_SIZE_PEER_COUNT=20 \
+    #MAXIMUM_SEGMENT_SIZE=100 \
+    #MAXIMUM_SEGMENT_SIZE_PEER_COUNT=10 \
+    #MINIMUM_LATENCY_IN_TICKS=2 \
+    #MAX_HEARTBEATS_PER_SECOND=60 \
+    #MAX_UPLOAD_SLOTS=5 \
+    #MAX_UPLOAD_IN_KILOBYTES_PER_SECOND=0 
     
 # Metadata
-LABEL maintainer="slauth82 <joboffers@divebored.com>" \
+LABEL maintainer="https://github.com/slauth82/factorio>" \
       description="Containerized dedicated server for Factorio Space Age with mod support" \
       version="1.0.0" \
       author="slauth82" 
@@ -60,7 +61,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Create directory structure
-RUN mkdir -p /opt/factorio /opt/factorio/config /opt/factorio/saves /opt/factorio/mods /opt/factorio/scenarios /opt/factorio/script-output
+RUN mkdir -p /opt/factorio /opt/factorio/log /opt/factorio/config /opt/factorio/saves /opt/factorio/mods /opt/factorio/scenarios /opt/factorio/script-output
 
 # Download and install Factorio headless server depending on version specified
 RUN if [ "$FACTORIO_VERSION" = "latest" ]; then \

@@ -5,6 +5,7 @@ FACTORIO_BIN="/opt/factorio/bin/x64/factorio"
 SAVE_DIR="/opt/factorio/saves"
 CONFIG_DIR="/opt/factorio/data"
 MODS_DIR="/opt/factorio/mods"
+LOG_DIR="/opt/factorio/logs"
 function initial_setup () {
 echo "        ███████╗ █████╗  ██████╗████████╗ ██████╗ ██████╗ ██╗ ██████╗       ";
 echo "        ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██║██╔═══██╗      ";
@@ -170,7 +171,18 @@ echo "Aligning Factorio Saves directory permissions to UID:GID ${UID}:${GID}..."
 chown -R "${UID}:${GID}" /opt/factorio/saves
 echo "COMPLETED-Permissions aligned."
 }
+function log_mover(){
+## Get the logs out of data folder.
+if [[ -f "${CONFIG_DIR}/factorio-current.log" ]]; then
+    mv /opt/factorio/data/factorio-current.log /opt/factorio/log/
+fi
+if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
+    mv /opt/factorio/data/factorio-previous.log /opt/factorio/log/
+fi
+ln -s /opt/factorio/log/factorio-current.log /opt/factorio/data/factorio-current.log
+ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/data/factorio-previous.log
 
+}
 # function to build a complete the Factorio server command line argument and run it.
 function rungame () {
     echo "Building command to start Factorio server..."
@@ -180,7 +192,7 @@ function rungame () {
     "--port" "${PORT}" \
     "--rcon-port" "${RCON_PORT}" \
     "--rcon-password" "${RCON_PASSWORD}" \
-    "--console-log" "${CONFIG_DIR}/console.log"
+    "--console-log" "${LOG_DIR}/console.log" 
 )  # Close the array FIRST
 
 # Then add conditional elements AFTER
@@ -205,13 +217,13 @@ echo ░█▀▀░█░░░█▀█░█▀█░░░▀░█▀▀░
 echo ░▀▀█░█░░░█░█░█▀▀░░░░░█▀▀░█░█░░░█░█░█▀▀░▀
 echo ░▀▀▀░▀▀▀░▀▀▀░▀░░░░░░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀  
 echo "================================================================"
-
 }
 #================================
 # Main script execution
 initial_setup
 server_config
 save_file_handler
-#LOAD_SAVE="C:\Users\%USERNAME%\OneDrive\Desktop\factorio\saves\Server.zip" # manually set for testing
+log_mover
 rungame
 #================================
+

@@ -12,6 +12,7 @@ services:
       - /home/factorio/mods:/opt/factorio/mods
       - /home/factorio/scenarios:/opt/factorio/scenarios
       - /home/factorio/saves:/opt/factorio/saves
+      - /var/log:/opt/factorio/logs
     secrets:
       - FACTORIO_USERNAME
       - FACTORIO_TOKEN
