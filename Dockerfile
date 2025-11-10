@@ -1,5 +1,6 @@
 # Choosing Debian Slim base because it already includes glibc and 64-bit libraries needed to run Factorio. Disregarded Alpine having to compile glibc by hand - adding complexity I don't need and with neglible size benefits.
-FROM debian:trixie-slim
+# trixie = Debian 13
+FROM debian:trixie-slim 
 
 # Arguments can only be set at build time, not runtime, and are baked into the build meta data. Do not put secrets in here.
 ARG DEBIAN_FRONTEND=noninteractive
@@ -46,7 +47,7 @@ LABEL maintainer="slauth82 <joboffers@divebored.com>" \
       version="1.0.0" \
       author="slauth82" 
 
-# Install core dependencies
+# Install core dependencies, clean up apt cache and remove golang to address multiple unresolved CVEs for trixie. https://security-tracker.debian.org/tracker/source-package/golang-1.24
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
@@ -58,7 +59,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ln -snf /usr/share/zoneinfo/$TZINFO /etc/localtime && \
     echo $TZINFO > /etc/timezone && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get purge -y golang golang-1.24 golang-go && \
+    apt-get autoremove -y && \
+    rm -rf /usr/local/go /usr/lib/go /usr/lib/golang
 
 # Create directory structure
 RUN mkdir -p /opt/factorio /opt/factorio/config /opt/factorio/saves /opt/factorio/mods /opt/factorio/scenarios /opt/factorio/script-output
