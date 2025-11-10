@@ -154,7 +154,7 @@ function save_file_handler () {
         return 0
     fi
     if [[ "${LOAD_LATEST_SAVE}" == "true" ]]; then
-    LOAD_SAVE=$(ls -1t "${SAVE_DIR}"/"$(SAVE_NAME))" 2>/dev/null | head -n 1)
+    LOAD_SAVE=$(ls -1t "${SAVE_DIR}"/"${SAVE_NAME}" 2>/dev/null | head -n 1)
         if [[ -z "${LOAD_SAVE}" ]]; then
             echo "No save found, creating new save..."
             ${FACTORIO_BIN} --create "${SAVE_DIR}/_autosave1.zip"
