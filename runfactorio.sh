@@ -209,10 +209,10 @@ echo "================================================================"
 }
 function log_mover(){
 ## Get the logs out of data folder.
-if [[ -f "${CONFIG_DIR}/factorio-current.log" ]]; then
+if [[ -f "/opt/factorio/factorio-current.log" ]]; then
     mv /opt/factorio/factorio-current.log /opt/factorio/log/
 fi
-if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
+if [[ -f "/opt/factorio/factorio-previous.log" ]]; then
     mv /opt/factorio/factorio-previous.log /opt/factorio/log/
 fi
 ln -s /opt/factorio/log/factorio-current.log /opt/factorio/factorio-current.log
