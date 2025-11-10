@@ -51,9 +51,7 @@ LABEL maintainer="slauth82 <joboffers@divebored.com>" \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
-    wget \
     tzdata \
-    nano \
     gosu \
     xz-utils && \
     ln -snf /usr/share/zoneinfo/$TZINFO /etc/localtime && \
