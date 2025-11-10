@@ -171,21 +171,7 @@ echo "Aligning Factorio Saves directory permissions to UID:GID ${UID}:${GID}..."
 chown -R "${UID}:${GID}" /opt/factorio/saves
 echo "COMPLETED-Permissions aligned."
 }
-function log_mover(){
-## Get the logs out of data folder.
-if [[ -f "${CONFIG_DIR}/factorio-current.log" ]]; then
-    mv /opt/factorio/data/factorio-current.log /opt/factorio/log/
-fi
-if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
-    mv /opt/factorio/data/factorio-previous.log /opt/factorio/log/
-fi
-ln -s /opt/factorio/log/factorio-current.log /opt/factorio/data/factorio-current.log
-ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/data/factorio-previous.log
 
-echo "Aligning Factorio Log directory permissions to UID:GID ${UID}:${GID}..."
-chown -R "${UID}:${GID}" /opt/factorio/log
-echo "COMPLETED-Permissions aligned."
-}
 # function to build a complete the Factorio server command line argument and run it.
 function rungame () {
     echo "Building command to start Factorio server..."
@@ -221,12 +207,27 @@ echo ░▀▀█░█░░░█░█░█▀▀░░░░░█▀▀░
 echo ░▀▀▀░▀▀▀░▀▀▀░▀░░░░░░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀  
 echo "================================================================"
 }
+function log_mover(){
+## Get the logs out of data folder.
+#if [[ -f "${CONFIG_DIR}/factorio-current.log" ]]; then
+#    mv /opt/factorio/data/factorio-current.log /opt/factorio/log/
+#fi
+#if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
+#    mv /opt/factorio/data/factorio-previous.log /opt/factorio/log/
+#fi
+ln -s /opt/factorio/log/factorio-current.log /opt/factorio/data/factorio-current.log
+ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/data/factorio-previous.log
+
+echo "Aligning Factorio Log directory permissions to UID:GID ${UID}:${GID}..."
+chown -R "${UID}:${GID}" /opt/factorio/log
+echo "COMPLETED-Permissions aligned."
+}
 #================================
 # Main script execution
 initial_setup
 server_config
 save_file_handler
-log_mover
 rungame
+log_mover
 #================================
 
