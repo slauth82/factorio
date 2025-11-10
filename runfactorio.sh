@@ -198,7 +198,7 @@ if [[ -f "${CONFIG_DIR}/server-adminlist.json" ]]; then
 fi
 echo "Command built: ${SERVER_CMD[*]}"
 echo "Starting Factorio server..."
-    exec gosu factorio "${SERVER_CMD[@]}"
+nohup gosu factorio "${SERVER_CMD[@]}" > /opt/factorio/log/console.log 2>&1 &
 echo "================================================================"
 echo "Factorio Server Running."
 echo "================================================================"
@@ -207,7 +207,8 @@ echo ░▀▀█░█░░░█░█░█▀▀░░░░░█▀▀░
 echo ░▀▀▀░▀▀▀░▀▀▀░▀░░░░░░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀  
 echo "================================================================"
 }
-function log_mover(){
+sleep 10
+function log_mover() {
 ## Get the logs out of data folder.
 if [[ -f "/opt/factorio/factorio-current.log" ]]; then
     mv /opt/factorio/factorio-current.log /opt/factorio/log/
