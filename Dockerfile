@@ -47,7 +47,7 @@ LABEL maintainer="slauth82 <joboffers@divebored.com>" \
       version="1.0.0" \
       author="slauth82" 
 
-# Install core dependencies, clean up apt cache and remove golang to address multiple unresolved CVEs for trixie. https://security-tracker.debian.org/tracker/source-package/golang-1.24
+# Install core dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
@@ -58,12 +58,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xz-utils && \
     ln -snf /usr/share/zoneinfo/$TZINFO /etc/localtime && \
     echo $TZINFO > /etc/timezone && \
-    # Clean up golang if it got pulled in as a dependency
-    apt-mark hold golang-go 2>/dev/null || true && \
-    dpkg --purge --force-all golang-go 2>/dev/null || true && \
-    apt-get autoremove -y && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /usr/local/go /usr/lib/go /usr/lib/golang
+    rm -rf /var/lib/apt/lists/*
 
 # Create directory structure
 RUN mkdir -p /opt/factorio /opt/factorio/config /opt/factorio/saves /opt/factorio/mods /opt/factorio/scenarios /opt/factorio/script-output
