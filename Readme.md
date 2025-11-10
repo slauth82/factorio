@@ -3,7 +3,7 @@
 ![Docker Image Size](https://img.shields.io/docker/image-size/slautomaton/factorio?arch=amd64&style=plastic&logo=docker&label=Image%20Size)
 ![GitHub License](https://img.shields.io/github/license/slauth82/factorio?style=plastic&logo=github&lable=License)
 ![GitHub last commit](https://img.shields.io/github/last-commit/slauth82/factorio?style=plastic&logo=github&label=Last%20Commit)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/01.yml?style=plastic&logo=github&label=Build)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/01.yml?style=plastic&logo=github&label=Build) \
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/02.yml?style=plastic&logo=google&label=OSV%20Scan%20Check)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/03.yml?style=plastic&logo=docker&label=Docker%20Scout)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/04.yml?style=plastic&logo=trivy&label=Trivy%20CVE)
