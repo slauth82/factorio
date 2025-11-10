@@ -4,3 +4,4 @@
 *.bak
 *.env
 /.secrets/*
+/hostfiles/*
