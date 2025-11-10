@@ -5,7 +5,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/slauth82/factorio?style=plastic&logo=github&label=Last%20Commit)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/01.yml?style=plastic&logo=github&label=Build) \
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/02.yml?style=plastic&logo=google&label=OSV%20Scan%20Check)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/03.yml?style=plastic&logo=docker&label=Docker%20Scout)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/slauth82/factorio/04.yml?style=plastic&logo=trivy&label=Trivy%20CVE)
 
 # Containerized Factorio Space Age Dedicated Server

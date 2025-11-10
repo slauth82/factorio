@@ -36,11 +36,14 @@ jobs:
         with:
           image-ref: '${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPO }}:stable'
           format: 'sarif'
-          exit-code: 0
+          exit-code: 1
           severity: 'CRITICAL,HIGH'
           output: 'trivy-report.sarif'
+        env:
+          TRIVY_VEX: '.vex'
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
+        if: always()
         with:
           sarif_file: 'trivy-report.sarif'
    
