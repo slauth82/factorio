@@ -39,11 +39,11 @@ jobs:
           exit-code: 1
           severity: 'CRITICAL,HIGH'
           output: 'trivy-report.sarif'
+          limit-severities-for-sarif: 'true'
         env:
           TRIVY_VEX: '.github/vex/'
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
-        if: always()
         with:
           sarif_file: 'trivy-report.sarif'
    
