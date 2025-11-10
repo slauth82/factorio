@@ -5,7 +5,7 @@ FACTORIO_BIN="/opt/factorio/bin/x64/factorio"
 SAVE_DIR="/opt/factorio/saves"
 CONFIG_DIR="/opt/factorio/data"
 MODS_DIR="/opt/factorio/mods"
-LOG_DIR="/opt/factorio/logs"
+LOG_DIR="/opt/factorio/log"
 function initial_setup () {
 echo "        ███████╗ █████╗  ██████╗████████╗ ██████╗ ██████╗ ██╗ ██████╗       ";
 echo "        ██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██║██╔═══██╗      ";
@@ -181,6 +181,7 @@ if [[ -f "${CONFIG_DIR}/factorio-previous.log" ]]; then
 fi
 ln -s /opt/factorio/log/factorio-current.log /opt/factorio/data/factorio-current.log
 ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/data/factorio-previous.log
+
 echo "Aligning Factorio Log directory permissions to UID:GID ${UID}:${GID}..."
 chown -R "${UID}:${GID}" /opt/factorio/log
 echo "COMPLETED-Permissions aligned."
