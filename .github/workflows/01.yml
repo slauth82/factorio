@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'Dockerfile'
-      - 'runicarus.sh'
+      - 'runfactorio.sh'
    
 
 jobs:
@@ -31,8 +31,6 @@ jobs:
         with:
           context: .
           call: check
-          build-args: |
-            BUILDKIT_DOCKERFILE_CHECK=skip=SecretsUsedInArgOrEnv
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -40,6 +38,3 @@ jobs:
           context: .
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPO }}:stable
-          build-args: |
-            BUILDKIT_DOCKERFILE_CHECK=skip=SecretsUsedInArgOrEnv
-   
