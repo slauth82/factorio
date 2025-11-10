@@ -2,7 +2,7 @@
   "@context": "https://openvex.dev/ns/v0.2.0",
   "@id": "https://slauth82.github.io/factorio/vex",
   "author": "slauth82",
-  "timestamp": "2025-11-09T21:17:00Z",
+  "timestamp": "2025-11-09T21:26:00Z",
   "version": 1,
   "statements": [
     {
@@ -11,10 +11,7 @@
       },
       "products": [
         {
-          "@id": "pkg:docker/slautomaton/factorio@stable"
-        },
-        {
-          "@id": "pkg:oci/slautomaton/factorio@stable"
+          "@id": "pkg:oci/factorio"
         }
       ],
       "subcomponents": [
@@ -24,7 +21,7 @@
       ],
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
-      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server. The vulnerable code paths are never invoked during container runtime."
+      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server."
     },
     {
       "vulnerability": {
@@ -32,10 +29,7 @@
       },
       "products": [
         {
-          "@id": "pkg:docker/slautomaton/factorio@stable"
-        },
-        {
-          "@id": "pkg:oci/slautomaton/factorio@stable"
+          "@id": "pkg:oci/factorio"
         }
       ],
       "subcomponents": [
@@ -45,7 +39,7 @@
       ],
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
-      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server. The vulnerable code paths are never invoked during container runtime."
+      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server."
     },
     {
       "vulnerability": {
@@ -53,10 +47,7 @@
       },
       "products": [
         {
-          "@id": "pkg:docker/slautomaton/factorio@stable"
-        },
-        {
-          "@id": "pkg:oci/slautomaton/factorio@stable"
+          "@id": "pkg:oci/factorio"
         }
       ],
       "subcomponents": [
@@ -66,7 +57,7 @@
       ],
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
-      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server. The vulnerable code paths are never invoked during container runtime."
+      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server."
     },
     {
       "vulnerability": {
@@ -74,10 +65,7 @@
       },
       "products": [
         {
-          "@id": "pkg:docker/slautomaton/factorio@stable"
-        },
-        {
-          "@id": "pkg:oci/slautomaton/factorio@stable"
+          "@id": "pkg:oci/factorio"
         }
       ],
       "subcomponents": [
@@ -87,15 +75,12 @@
       ],
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
-      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server. The vulnerable code paths are never invoked during container runtime."
+      "impact_statement": "Golang stdlib is present in debian:trixie-slim base image but not executed by Factorio game server."
     },
     {
       "products": [
         {
-          "@id": "pkg:docker/slautomaton/factorio@stable"
-        },
-        {
-          "@id": "pkg:oci/slautomaton/factorio@stable"
+          "@id": "pkg:oci/factorio"
         }
       ],
       "subcomponents": [
@@ -105,7 +90,7 @@
       ],
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
-      "impact_statement": "Golang stdlib package (all CVEs: CVE-2025-61725, CVE-2025-61723, CVE-2025-58188, CVE-2025-58187) is present in debian:trixie-slim base image but not executed by Factorio game server runtime. The vulnerable code paths are never invoked."
+      "impact_statement": "Golang stdlib package is present in debian:trixie-slim but not executed by Factorio runtime."
     }
   ]
 }
