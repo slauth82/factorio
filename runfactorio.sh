@@ -207,13 +207,22 @@ echo ░▀▀█░█░░░█░█░█▀▀░░░░░█▀▀░
 echo ░▀▀▀░▀▀▀░▀▀▀░▀░░░░░░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀  
 echo "================================================================"
 }
-
+sleep 20
+function log_mover() {
+## Get the logs out of data folder.
+echo "Log Migration Shell Loop Initiated"
+while true; do
+    cp /opt/factorio/factorio-current.log /opt/factorio/log/factorio-current.log
+    sleep 600  # 10 minutes
+done &
+echo "Logs Migrated Every 10 Minutes!"
+}
 #================================
 # Main script execution
 initial_setup
 server_config
 save_file_handler
 rungame
-
+log_mover
 #================================
 
