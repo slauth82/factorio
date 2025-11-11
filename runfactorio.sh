@@ -207,27 +207,13 @@ echo ░▀▀█░█░░░█░█░█▀▀░░░░░█▀▀░
 echo ░▀▀▀░▀▀▀░▀▀▀░▀░░░░░░░▀▀▀░▀░▀░░░▀▀▀░▀░░░▀  
 echo "================================================================"
 }
-sleep 10
-function log_mover() {
-## Get the logs out of data folder.
-if [[ -f "/opt/factorio/factorio-current.log" ]]; then
-    mv /opt/factorio/factorio-current.log /opt/factorio/log/
-fi
-if [[ -f "/opt/factorio/factorio-previous.log" ]]; then
-    mv /opt/factorio/factorio-previous.log /opt/factorio/log/
-fi
-ln -s /opt/factorio/log/factorio-current.log /opt/factorio/factorio-current.log
-ln -s /opt/factorio/log/factorio-previous.log /opt/factorio/factorio-previous.log
-echo "Aligning Factorio Log directory permissions to UID:GID ${UID}:${GID}..."
-chown -R "${UID}:${GID}" /opt/factorio/log
-echo "COMPLETED-Permissions aligned."
-}
+
 #================================
 # Main script execution
 initial_setup
 server_config
 save_file_handler
 rungame
-log_mover
+
 #================================
 
