@@ -2,6 +2,9 @@ services:
   factorio:
     container_name: factorio
     image: slautomaton/factorio:stable
+    dns: #factorio server curls out to their api. This ensures the container can resolve hosts and avoids errors thrown.
+      - 8.8.8.8
+      - 1.1.1.1
     hostname: factorio-dedicated
     init: true
     restart: "unless-stopped"
