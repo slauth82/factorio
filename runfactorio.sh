@@ -171,16 +171,6 @@ echo "Aligning Factorio Saves directory permissions to UID:GID ${UID}:${GID}..."
 chown -R "${UID}:${GID}" /opt/factorio/saves
 echo "COMPLETED-Permissions aligned."
 }
-function log_mover() {
-## Get the logs out of data folder.
-echo "Log Migration Shell Loop Initiated"
-while true; do
-    cp /opt/factorio/factorio-current.log /opt/factorio/log/factorio-current.log
-    cp /opt/factorio/factorio-current.log /opt/factorio/log/factorio-previous.log
-    sleep 600  # 10 minutes
-done &
-echo "Logs Migrated Every 10 Minutes!"
-}
 # function to build a complete the Factorio server command line argument and run it.
 function rungame () {
     echo "Building command to start Factorio server..."
@@ -222,7 +212,6 @@ echo "================================================================"
 initial_setup
 server_config
 save_file_handler
-log_mover
 rungame
 
 #================================
