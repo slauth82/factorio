@@ -181,7 +181,9 @@ function rungame () {
     "--rcon-port" "${RCON_PORT}" \
     "--rcon-password" "${RCON_PASSWORD}" \
     "--console-log" "${LOG_DIR}/console.log" 
+    ) # Close the array FIRST
 # Then add conditional elements AFTER
+
 if [[ -f "${CONFIG_DIR}/server-whitelist.json" ]]; then
     SERVER_CMD+=("--server-whitelist" "${CONFIG_DIR}/server-whitelist.json")
 fi
@@ -193,7 +195,7 @@ fi
 if [[ -f "${CONFIG_DIR}/server-adminlist.json" ]]; then
     SERVER_CMD+=("--server-adminlist" "${CONFIG_DIR}/server-adminlist.json")
 fi
-)  # Close the array FIRST
+
 echo "Command built: ${SERVER_CMD[*]}"
 echo "Starting Factorio server..."
     exec gosu factorio "${SERVER_CMD[@]}" 
